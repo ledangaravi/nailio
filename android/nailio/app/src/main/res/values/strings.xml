@@ -1,4 +1,28 @@
 <resources>
     <string name="app_name">nailio</string>
     <string name="photo_button">Take a photo</string>
+
+    <string name="take_picture">Take picture</string>
+
+    <string name="picture">Picture</string>
+    <string name="description_info">Info</string>
+    <string name="request_permission">This sample needs camera permission.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="intro_message">
+        <![CDATA[
+
+
+            This sample demonstrates the basic use of Camera2 API. Check the source code to see how
+            you can display camera preview and take pictures.
+
+
+        ]]>
+    </string>
+
+    <!-- notification -->
+    <string name="notification_channel_name">reminder</string>
+    <string name="notification_channel_description">reminder description</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
