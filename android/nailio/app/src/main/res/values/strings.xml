@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">nailio</string>
+    <string name="photo_button">Take a photo</string>
 </resources>
