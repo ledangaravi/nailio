@@ -1,26 +1,47 @@
 package com.ledangaravi.nailio;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
+import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
+import android.view.View;
+import android.widget.RelativeLayout;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
+
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class CaptureActivity extends AppCompatActivity {
+    public static final String EXTRA_MESSAGE = "com.ledangaravi.nailio.MESSAGE";
+
+    String currentPhotoPath;
 
     /*CameraManager cameraManager;
     int cameraFacing;
@@ -28,8 +49,20 @@ public class CaptureActivity extends AppCompatActivity {
     TextureView.SurfaceTextureListener surfaceTextureListener;
     CameraDevice.StateCallback stateCallback;*/
     TextureView textureView; //todo
+    private CameraCaptureSession cameraCaptureSession;
 
     TextureView.SurfaceTextureListener surfaceTextureListener;
+    CameraDevice.StateCallback stateCallback;
+    private CameraDevice cameraDevice;
+    private HandlerThread backgroundThread;
+    private Handler backgroundHandler;
+    int CAMERA_REQUEST_CODE = 1;
+    int cameraFacing;
+    CameraManager cameraManager;
+    private Size previewSize;
+    private CaptureRequest.Builder captureRequestBuilder;
+    private CaptureRequest captureRequest;
+    private String cameraId;
 
 
 
@@ -37,10 +70,21 @@ public class CaptureActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
+        setContentView(R.layout.activity_capture);
 
         //?
         textureView = (TextureView) findViewById(R.id.texture_view);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_take_photo);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onTakePhotoButtonClicked();
+            }
+        });
+
+        Box box = new Box(this);
+        addContentView(box, new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.FILL_PARENT, ConstraintLayout.LayoutParams.FILL_PARENT));
+
 
         //todo remove?
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST_CODE);
@@ -48,8 +92,7 @@ public class CaptureActivity extends AppCompatActivity {
         cameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         cameraFacing = CameraCharacteristics.LENS_FACING_BACK;
 
-        surfaceTextureListener
-                = new TextureView.SurfaceTextureListener() {
+        surfaceTextureListener = new TextureView.SurfaceTextureListener() {
 
             @Override
             public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
@@ -76,20 +119,20 @@ public class CaptureActivity extends AppCompatActivity {
         stateCallback = new CameraDevice.StateCallback() {
             @Override
             public void onOpened(CameraDevice cameraDevice) {
-                CameraActivity.this.cameraDevice = cameraDevice;
+                CaptureActivity.this.cameraDevice = cameraDevice;
                 createPreviewSession();
             }
 
             @Override
             public void onDisconnected(CameraDevice cameraDevice) {
                 cameraDevice.close();
-                CameraActivity.this.cameraDevice = null;
+                CaptureActivity.this.cameraDevice = null;
             }
 
             @Override
             public void onError(CameraDevice cameraDevice, int error) {
                 cameraDevice.close();
-                CameraActivity.this.cameraDevice = null;
+                CaptureActivity.this.cameraDevice = null;
             }
         };
     }
@@ -187,8 +230,8 @@ public class CaptureActivity extends AppCompatActivity {
 
                             try {
                                 captureRequest = captureRequestBuilder.build();
-                                CameraActivity.this.cameraCaptureSession = cameraCaptureSession;
-                                CameraActivity.this.cameraCaptureSession.setRepeatingRequest(captureRequest,
+                                CaptureActivity.this.cameraCaptureSession = cameraCaptureSession;
+                                CaptureActivity.this.cameraCaptureSession.setRepeatingRequest(captureRequest,
                                         null, backgroundHandler);
                             } catch (CameraAccessException e) {
                                 e.printStackTrace();
@@ -203,5 +246,44 @@ public class CaptureActivity extends AppCompatActivity {
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
+    }
+
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+
+    public void onTakePhotoButtonClicked() {
+        FileOutputStream outputPhoto = null;
+        try {
+            outputPhoto = new FileOutputStream(createImageFile());
+            textureView.getBitmap()
+                    .compress(Bitmap.CompressFormat.PNG, 100, outputPhoto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (outputPhoto != null) {
+                    outputPhoto.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Intent intent = new Intent(this, EvalActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, currentPhotoPath);
+        startActivity(intent);
     }
 }
