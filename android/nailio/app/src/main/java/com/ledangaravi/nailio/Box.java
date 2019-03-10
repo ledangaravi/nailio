@@ -17,7 +17,7 @@ public class Box extends View {
         super.onDraw(canvas);
 
         paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.GREEN);
+        paint.setColor(getResources().getColor(R.color.colorGreen));
         paint.setStrokeWidth(10);
 
         //center

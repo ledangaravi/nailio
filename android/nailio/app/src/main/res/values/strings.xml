@@ -2,22 +2,30 @@
     <string name="app_name">nailio</string>
     <string name="photo_button">Take a photo</string>
 
-    <string name="take_picture">Take picture</string>
-
-    <string name="picture">Picture</string>
-    <string name="description_info">Info</string>
-    <string name="request_permission">This sample needs camera permission.</string>
-    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
-    <string name="intro_message">
-        <![CDATA[
+    <string name="eval_nailio_score">YOUR NAILIO SCORE</string>\
+    <string name="eval_button_learn">Learn more</string>
 
 
-            This sample demonstrates the basic use of Camera2 API. Check the source code to see how
-            you can display camera preview and take pictures.
+    <!-- normal -->
+    <string name="nailed_it">Wow! You\'ve #NailedIt. Your NAILIO score is great.
+        Here are some tips to keep up the good work:</string>
+
+    <string name="verdict_general_tips">
+        • Wear rubber gloves when carrying out household cleaning
+        \n• Avoid cutting your cuticles
+        \n• Trim your nails on a regular basis
+        \n• Keep your hands and feet dry
+        \n• Make sure you are taking your daily requirements in vitamins and minerals (Vitamin B, Calcium, and Zinc are the best here!)
+        \n• Restrain from biting or picking your nails
+        \n• Wear clean socks</string>
+
+    <!-- todo 98% -->
+    <string name="verdict_other">NAILIO thinks you are about 98% likely to be suffering from a type
+        of nail dystrophy. In most cases, this is not something serious to worry about.
+        Nail dystrophy is the distortion and discolouration of a normal nail. No fungal infections
+        have been recognised. It is likely your nail disfigurement is due to a lack of care and hygiene.</string>
 
 
-        ]]>
-    </string>
 
     <!-- notification -->
     <string name="notification_channel_name">reminder</string>

@@ -4,28 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Tips1Activity">
 
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/tips1_custom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="photoButton"
-        android:text="@string/photo_button"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="TextView"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="91dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/logo_imageView"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/tips1_general"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="@string/verdict_general_tips"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.966"
-        app:srcCompat="@drawable/logo_foreground" />
+        app:layout_constraintTop_toBottomOf="@+id/tips1_custom" />
 </android.support.constraint.ConstraintLayout>

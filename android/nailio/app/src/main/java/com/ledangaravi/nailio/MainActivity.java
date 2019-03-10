@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             //Bitmap imageBitmap = (Bitmap) extras.get("data");
             Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
 
-            ImageView imageView = findViewById(R.id.imageView);
+            ImageView imageView = findViewById(R.id.logo_imageView);
             imageView.setImageBitmap(bitmap);
         }
     }
