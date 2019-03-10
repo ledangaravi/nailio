@@ -1,1 +1,1 @@
-nailio
+nailio enables the smartphone-based diagnosis of nail disorders. Our machine learning powered platform facilitates instant at-home diagnosis that outperforms human doctors in classifying some of the most common symptoms. nailio provides users with comprehensive advice that will accelerate diagnosis, treatment and recovery from the underlying diseases causing nail disorders.
