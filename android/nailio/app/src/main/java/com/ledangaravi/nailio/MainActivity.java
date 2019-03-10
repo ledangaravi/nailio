@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("myTag", "main on create");
-        createNotificationChannel();
+        //createNotificationChannel();
 
         FloatingActionButton fabHome = (FloatingActionButton) findViewById(R.id.main_fab_pic);
         fabHome.setOnClickListener(new View.OnClickListener() {

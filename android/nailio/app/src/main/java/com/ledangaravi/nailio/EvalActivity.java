@@ -126,7 +126,7 @@ public class EvalActivity extends AppCompatActivity {
 
                                 buttonMore.setVisibility(View.VISIBLE);
 
-                                //todo
+
                                 score = data.getString("nailioscore");
                                 diagnosis = data.getString("condition");
                                 confidence = data.getString("confidence");

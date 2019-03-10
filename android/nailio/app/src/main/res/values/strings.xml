@@ -3,14 +3,14 @@
     <string name="photo_button">Take a photo</string>
     <string name="main_instruction">Take a photo of your nail to get started</string>
 
-    <string name="eval_nailio_score">YOUR NAILIO SCORE</string>\
+    <string name="eval_nailio_score">your nailio score:</string>\
     <string name="eval_button_learn">Learn more</string>
     <string name="eval_score_default">Calculating&#8230;</string>
 
 
     <string name="nailed_it">Wow! \nYou\'ve #NailedIt</string>
     <!-- normal -->
-    <string name="verdict_normal"><font size="20">Wow! You\'ve #NailedIt. Your NAILIO score is great.
+    <string name="verdict_normal"><font size="20">Wow! You\'ve #NailedIt. Your nailio score is great.
         Here are some tips to keep up the good work:</font></string>
 
     <string name="verdict_general_tips">• Wear rubber gloves when carrying out household cleaning
@@ -30,25 +30,26 @@
     <string name="advice7">Wear clean socks</string>
 
 
-    <string name="verdict_other"><font size="20">NAILIO has sensed that you may be suffering from some sort of nail
+    <string name="verdict_other"><font size="20">nailio has sensed that you may be suffering from some sort of nail
         disease. \nPlease contact your GP for further sample testing. In the meantime, in order to
-        maintain healthy nails, NAILIO advises you to:</font>
+        maintain healthy nails, nailio advises you to:</font>
         </string>
 
-    <string name="verdict_naildystrophy"><font size="20">NAILIO thinks you are likely to be suffering from a type
+    <string name="verdict_naildystrophy"><font size="20">nailio thinks you are likely to be suffering from a type
         of nail dystrophy. In most cases, this is not something serious to worry about.
-        Nail dystrophy is the distortion and discolouration of a normal nail. No fungal infections
-        have been recognised. It is likely your nail disfigurement is due to a lack of care and hygiene.</font>
+        \nNail dystrophy is the distortion and discolouration of a normal nail. No fungal infections
+        have been recognised. It is likely your nail disfigurement is due to a lack of care and hygiene.
+        \nGeneral tips:</font>
     </string>
 
 
 
-    <string name="verdict_onychomycosis"><font size="20">NAILIO has sensed that you may have <i>onychomycosis</i>. Please contact your GP for further
+    <string name="verdict_onychomycosis"><font size="20">nailio has sensed that you may have <i>onychomycosis</i>. Please contact your GP for further
         sample testing.</font>
 
         \n\n<font size="24"><i>What is onychomycosis?</i></font>
 
-        \n\nIt is a fungal infection of the nail. The symptoms that NAILIO has potentially recognised
+        \n\nIt is a fungal infection of the nail. The symptoms that nailio has potentially recognised
         are nail discolouration and thickening. It effects about 10% of the adult population.
 
         \n\n<font size="24"><i>What happens if I do nothing about it?</i></font>
@@ -60,7 +61,7 @@
 
         \n\nAntifungal medicines are highly effective and widely available without prescription.
     </string>
-    <string name="verdict_onycholysis"><font size="20">NAILIO has sensed that you may have <i>onycholysis</i>. Please contact your GP for further sample testing.</font>
+    <string name="verdict_onycholysis"><font size="20">nailio has sensed that you may have <i>onycholysis</i>. Please contact your GP for further sample testing.</font>
 
         \n\n<font size="24"><i>What is onycholysis?</i></font>
 
@@ -72,7 +73,7 @@
         \n\n<font size="24"><i>What happens if I do nothing about it?</i></font>
 
         \n\nSome of the causes mentioned above normally result in other adverse effects upon the body.
-        Therefore, onycholysis is a strong indicator that something may be wrong. Leaving it without
+        Therefore, <i>onycholysis</i> is a strong indicator that something may be wrong. Leaving it without
         checking with your GP is not advised.
 
         \n\n<font size="24"><i>What can I do?</i></font>
@@ -83,7 +84,7 @@
         If the issue persists, contact your GP to forward you to a dermatologist.
     </string>
 
-    <string name="verdict_melanonychia"><font size="20">NAILIO has sensed that you may have <i>melanonychia</i>. Please contact your GP for further sample testing.</font>
+    <string name="verdict_melanonychia"><font size="20">nailio has sensed that you may have <i>melanonychia</i>. Please contact your GP for further sample testing.</font>
 
         \n\n<font size="24"><i>What is melanonychia?</i></font>
 
@@ -94,7 +95,7 @@
 
         \n\nUsually this is not something to worry about and may be due to a recent medication
         you have started taking. However, there is a risk it is due to a fungal infection or
-        skin cancer if this is not due to any new medicines.
+        skin cancer (melanoma) if this is not due to any new medicines.
 
         \n\n<font size="24"><i>What can I do?</i></font>
 
@@ -106,6 +107,4 @@
     <string name="notification_channel_name">reminder</string>
     <string name="notification_channel_description">reminder description</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
