@@ -13,13 +13,13 @@
         android:id="@+id/fab_take_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:clickable="true"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_camera"
-        app:backgroundTint="@color/colorPrimary"/>
+        app:srcCompat="@drawable/ic_camera" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.FileProvider;
@@ -38,12 +39,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d("myTag", "main on create");
         createNotificationChannel();
+
+        FloatingActionButton fabHome = (FloatingActionButton) findViewById(R.id.main_fab_pic);
+        fabHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CaptureActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
     /**********************************************************************************************/
     //picture
-
+    /*
     public void photoButton(View view){
         //dispatchTakePictureIntent();
         //createNotification();
@@ -58,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
+                imageFileName,  // prefix
+                ".jpg",         // suffix
+                storageDir      // directory
         );
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
@@ -99,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             ImageView imageView = findViewById(R.id.logo_imageView);
             imageView.setImageBitmap(bitmap);
         }
-    }
+    }*/
 
     /**********************************************************************************************/
     //notification

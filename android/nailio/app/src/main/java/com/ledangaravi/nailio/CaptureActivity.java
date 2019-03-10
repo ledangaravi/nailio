@@ -43,12 +43,7 @@ public class CaptureActivity extends AppCompatActivity {
 
     String currentPhotoPath;
 
-    /*CameraManager cameraManager;
-    int cameraFacing;
-    int CAMERA_REQUEST_CODE = 1;
-    TextureView.SurfaceTextureListener surfaceTextureListener;
-    CameraDevice.StateCallback stateCallback;*/
-    TextureView textureView; //todo
+    TextureView textureView;
     private CameraCaptureSession cameraCaptureSession;
 
     TextureView.SurfaceTextureListener surfaceTextureListener;
@@ -72,7 +67,6 @@ public class CaptureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture);
 
-        //?
         textureView = (TextureView) findViewById(R.id.texture_view);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_take_photo);
         fab.setOnClickListener(new View.OnClickListener() {

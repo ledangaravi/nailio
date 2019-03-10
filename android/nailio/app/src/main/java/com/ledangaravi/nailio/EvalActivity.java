@@ -3,12 +3,19 @@ package com.ledangaravi.nailio;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +24,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -27,10 +33,15 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 
 public class EvalActivity extends AppCompatActivity {
-    public static final String EVAL_MESSAGE = "com.ledangaravi.nailio.EVAL_MESSAGE";
+    public static String score;
+    public static String diagnosis;
+    public static String confidence;
+
     Bitmap croppedBmp;
     TextView tvTitle;
     TextView tvScore;
+    TextView tvNailedIt;
+    Button buttonMore;
 
 
     @Override
@@ -39,6 +50,9 @@ public class EvalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_eval);
         tvTitle = findViewById(R.id.eval_nailio_score_title);
         tvScore = findViewById(R.id.eval_nailio_score);
+        tvNailedIt = findViewById(R.id.eval_nailed_it);
+
+        buttonMore = findViewById(R.id.eval_button_learn_more);
 
         final Intent intent = getIntent();
         String photoPath = intent.getStringExtra(CaptureActivity.EXTRA_MESSAGE);
@@ -50,7 +64,8 @@ public class EvalActivity extends AppCompatActivity {
         croppedBmp = Bitmap.createBitmap(bitmap, width/6, height/2-width/3, width*2/3, width*2/3);
 
         final ImageView imageView = findViewById(R.id.eval_image_view);
-        imageView.setImageBitmap(croppedBmp);
+        Bitmap rounded = getRoundedCornerBitmap(croppedBmp, 20);
+        imageView.setImageBitmap(rounded);
 
 
         final FloatingActionButton fabRedo = (FloatingActionButton) findViewById(R.id.eval_fab_redo);
@@ -69,7 +84,6 @@ public class EvalActivity extends AppCompatActivity {
                 sendImage();
                 tvTitle.setVisibility(View.VISIBLE);
                 tvScore.setVisibility(View.VISIBLE);
-                tvScore.setText("8/10");//todo
                 fabCheck.hide();
                 fabRedo.hide();
                 imageView.setVisibility(View.INVISIBLE);
@@ -82,7 +96,6 @@ public class EvalActivity extends AppCompatActivity {
 
     public void learnMore(View view){
         Intent intent = new Intent(this, Tips1Activity.class);
-        intent.putExtra(EVAL_MESSAGE, "normal");
         startActivity(intent);
     }
 
@@ -102,14 +115,31 @@ public class EvalActivity extends AppCompatActivity {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            // your response
-                            Log.d("myTag", "starting response");
                             Log.d("myTag", response);
                             try {
-                                //Do it with this it will work
-                                JSONObject person = new JSONObject(response);
-                                String normalNail = person.getString("normalnail");
-                                Log.d("myTag", normalNail);
+                                JSONObject data = new JSONObject(response.substring(response.indexOf('{')));
+                                Log.d("myTag",response.substring(response.indexOf('{')));
+
+                                //String normalNail = data.getString("normalnail");
+                                //Log.d("myTag", normalNail);
+
+
+                                buttonMore.setVisibility(View.VISIBLE);
+
+                                //todo
+                                score = data.getString("nailioscore");
+                                diagnosis = data.getString("condition");
+                                confidence = data.getString("confidence");
+                                //score = "7";//data.getString("normalnail") + "/10";
+                                //diagnosis = "normal";
+                                //confidence = "90%";
+                                tvScore.setText(score + "/10");
+                                tvScore.setTextSize(96);
+
+                                if(Integer.parseInt(score) >= 7){
+                                    tvNailedIt.setVisibility(View.VISIBLE);
+                                }
+
 
                             } catch (JSONException e) {
                                 Log.d("myTag", e.getMessage());
@@ -136,6 +166,28 @@ public class EvalActivity extends AppCompatActivity {
         catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
+                .getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+        final float roundPx = pixels;
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+
+        return output;
     }
 
 

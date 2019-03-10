@@ -21,10 +21,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Tips1Activity"></activity>
-        <activity android:name=".EvalActivity" />
+        <activity
+            android:name=".Tips1Activity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".EvalActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".CaptureActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Camera" />
         <activity
             android:name=".MainActivity"
