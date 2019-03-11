@@ -104,7 +104,7 @@ public class EvalActivity extends AppCompatActivity {
         final String imageBase64 = convert(croppedBmp);
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://35.204.55.190:6065";
+        String url = "http://35.204.92.147:6065";
 
         final JSONObject jsonBody = new JSONObject();
         try {
